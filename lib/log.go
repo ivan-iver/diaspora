@@ -17,9 +17,11 @@ type Logger struct {
 
 // GetLogger configure and returns logger struct
 func GetLogger() (l *Logger) {
-	l.Logger = logging.MustGetLogger("diaspora")
+	var log = &Logger{
+		Logger: logging.MustGetLogger("diaspora"),
+	}
 	var backend = logging.NewLogBackend(os.Stderr, "", 0)
 	var formated = logging.NewBackendFormatter(backend, format)
 	logging.SetBackend(formated)
-	return l
+	return log
 }
