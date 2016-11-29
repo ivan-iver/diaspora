@@ -9,6 +9,7 @@ import (
 
 const (
 	appName  = "Diaspora"
+	appNum   = "0.1"
 	desc     = "A command-line database migration tool"
 	upMsg    = "Migrate the DB to the most recent version available"
 	debugMsg = "Debug mode enabled"
@@ -46,7 +47,7 @@ func NewApp() (application *App) {
 		Config:  config,
 		Log:     log,
 		Command: &Command{Log: log},
-		Version: hash,
+		Version: fmt.Sprintf("%v %v %v : %v", appName, appNum, hash, desc),
 	}
 	application.init()
 	application.app.Version(application.Version)

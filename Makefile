@@ -1,12 +1,12 @@
 SHELL := bash
 # VERSION := 'API version\:$(shell date -u +%Y%m%d.%H%M%S)\($(shell git rev-parse --short HEAD)\)'
-VERSION := 'Diaspora:-0.1-:($(shell git rev-parse --short HEAD))'
+VERSION := ($(shell git rev-parse --short HEAD))
 
 export VERSION;
 
 build:
 	go build -v -ldflags "-X github.com/ivan-iver/diaspora/lib.hash=${VERSION}" -o bin/diaspora github.com/ivan-iver/diaspora
-#	@cp templates/app.conf bin/
+	@cp templates/db.conf bin/
 
 start:
 	./bin/api prod > ../logs/api.log 2>../logs/api.error.log &
