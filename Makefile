@@ -8,9 +8,6 @@ build:
 	go build -v -ldflags "-X github.com/ivan-iver/diaspora/lib.hash=${VERSION}" -o bin/diaspora github.com/ivan-iver/diaspora
 	@cp templates/db.conf bin/
 
-start:
-	./bin/api prod > ../logs/api.log 2>../logs/api.error.log &
-
 clean:
 	rm -r bin/*
 

@@ -8,12 +8,13 @@ import (
 )
 
 const (
-	appName  = "Diaspora"
-	appNum   = "0.1"
-	desc     = "A command-line database migration tool"
-	upMsg    = "Migrate the DB to the most recent version available"
-	debugMsg = "Debug mode enabled"
-	envMsg   = "Set the environment configuration [dev, production, etc] dev is the default"
+	appName   = "Diaspora"
+	appNum    = "0.1"
+	desc      = "A command-line database migration tool"
+	createMsg = "Create new migration file with the scaffolding attributes"
+	upMsg     = "Migrate the DB to the most recent version available"
+	debugMsg  = "Debug mode enabled"
+	envMsg    = "Set the environment configuration [dev, production, etc] dev is the default"
 )
 
 var hash = ""
@@ -51,7 +52,7 @@ func NewApp() (application *App) {
 	}
 	application.init()
 	application.app.Version(application.Version)
-	application.Up()
+	application.SetActions()
 	return
 }
 
@@ -61,10 +62,11 @@ func (a *App) init() {
 	a.app.Flag("env", envMsg).Short('e').Default("dev").StringVar(&a.Environment)
 }
 
-// Up execute the most recent version is available that did not run yet
-func (a *App) Up() {
+// SetActions create the relationship between commands, functions and parameters
+func (a *App) SetActions() {
 	a.app.Command("up", upMsg).Action(a.RunUp)
-	//	one.Arg("user_id", "Nubleer user identifier").Required().Int64Var(&a.UserId)
+	a.app.Command("create", createMsg).Action(a.RunCreate)
+	//	one.Arg("user_id", "User identifier").Required().Int64Var(&a.UserId)
 }
 
 // Parse all command line arguments
