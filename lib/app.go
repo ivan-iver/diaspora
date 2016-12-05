@@ -18,6 +18,7 @@ const (
 )
 
 var hash = ""
+var log *Logger
 
 // App is a principal structure where we join all application components.
 type App struct {
@@ -42,12 +43,12 @@ func config() (config *Config) {
 // NewApp initialize all App fields
 func NewApp() (application *App) {
 	var config = config()
-	var log = GetLogger()
+	log = GetLogger()
 	application = &App{
 		Name:    appName,
 		Config:  config,
 		Log:     log,
-		Command: &Command{Log: log},
+		Command: &Command{},
 		Version: fmt.Sprintf("%v %v %v : %v", appName, appNum, hash, desc),
 	}
 	application.init()

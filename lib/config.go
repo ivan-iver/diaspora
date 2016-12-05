@@ -1,7 +1,6 @@
 package lib
 
 import (
-	"log"
 	"os"
 	"path"
 	"strings"
@@ -26,20 +25,20 @@ type Config struct {
 func NewConfig() (config *Config, err error) {
 	config = &Config{Filename: filename}
 	if config.Pwd, err = os.Getwd(); err != nil {
-		log.Fatalf("| Error | %v \n", err)
+		log.Error("| Error | %v \n", err)
 		panic(err)
 	}
 
 	var file = config.File()
-	//	log.Printf("App | Config will be loaded from %v \n", file)
+	//	log.Debug("App | Config will be loaded from %v \n", file)
 	if config.Config, err = conf.ReadDefault(file); err != nil {
-		log.Fatalf("| Error | %v \n", err)
+		log.Error("| Error | %v \n", err)
 		config.setDefault()
 		return
 	}
-	//	log.Println("App | Config loaded successfully! \n")
+	//	log.Debug("App | Config loaded successfully! \n")
 	config.IsProduction = strings.EqualFold(config.Default("env"), production)
-	//log.Println("App | Config.IsProduction ", config.IsProduction)
+	//log.Info("App | Config.IsProduction ", config.IsProduction)
 	return
 }
 
