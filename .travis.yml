@@ -5,7 +5,9 @@ branches:
       - master
       - develop
 
-install: false
+install:
+  - go get -v github.com/Masterminds/glide
+  - glide install
 
 go:
   - 1.3
