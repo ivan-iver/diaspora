@@ -1,0 +1,5 @@
+package: github.com/ivan-iver/diaspora
+import:
+- package: bitbucket.org/ivan-iver/config
+- package: github.com/op/go-logging
+- package: gopkg.in/alecthomas/kingpin.v2
