@@ -11,6 +11,9 @@ type Command struct {
 
 //
 func (cmd *Command) RunUp(c *kingpin.ParseContext) (err error) {
+	if *debug {
+		log.Debug("Algo que poner en debug")
+	}
 	log.Info("Dentro de RunUp ", cmd)
 	return
 }

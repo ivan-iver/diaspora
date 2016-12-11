@@ -17,12 +17,5 @@ func main() {
 	}()
 
 	app := lib.NewApp()
-
-	if app.Debug {
-		log.Printf(" | Monitor | Ejecutando: %v", app.Version)
-	}
 	app.Parse(os.Args[1:])
-	if app.Debug {
-		log.Printf(" | Monitor | Finalize: %v", app.Version)
-	}
 }

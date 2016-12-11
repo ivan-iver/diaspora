@@ -17,8 +17,12 @@ const (
 	envMsg    = "Set the environment configuration [dev, production, etc] dev is the default"
 )
 
-var hash = ""
-var log *Logger
+var (
+	hash  = ""
+	log   *Logger
+	debug *bool
+	env   *string
+)
 
 // App is a principal structure where we join all application components.
 type App struct {
@@ -28,7 +32,6 @@ type App struct {
 	Environment string
 	Version     string
 	Name        string
-	Debug       bool
 	*Command
 }
 
@@ -45,26 +48,26 @@ func NewApp() (application *App) {
 	var config = config()
 	log = GetLogger()
 	application = &App{
+		app:     kingpin.New(appName, desc),
 		Name:    appName,
 		Config:  config,
 		Log:     log,
 		Command: &Command{},
 		Version: fmt.Sprintf("%v %v %v : %v", appName, appNum, hash, desc),
 	}
-	application.init()
+	application.setActions()
+	application.setFlags()
 	application.app.Version(application.Version)
-	application.SetActions()
 	return
 }
 
-func (a *App) init() {
-	a.app = kingpin.New(a.Name, desc)
-	a.app.Flag("debug", debugMsg).Short('d').Default("false").BoolVar(&a.Debug)
-	a.app.Flag("env", envMsg).Short('e').Default("dev").StringVar(&a.Environment)
+func (a *App) setFlags() {
+	debug = a.app.Flag("debug", debugMsg).Short('d').Bool()
+	env = a.app.Flag("env", envMsg).Short('e').Default("dev").String()
 }
 
 // SetActions create the relationship between commands, functions and parameters
-func (a *App) SetActions() {
+func (a *App) setActions() {
 	a.app.Command("up", upMsg).Action(a.RunUp)
 	a.app.Command("create", createMsg).Action(a.RunCreate)
 	//	one.Arg("user_id", "User identifier").Required().Int64Var(&a.UserId)
