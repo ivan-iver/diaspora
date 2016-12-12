@@ -20,13 +20,16 @@ type Serie struct {
 }
 
 // NewSerie returns a Serie struct initializated and error if exists
-func NewSerie() (serie *Serie, err error) {
+func NewSerie() (serie *Serie) {
 	var init = time.Now()
 	serie = &Serie{
 		Timestamp: init,
 		Formated:  fmt.Sprintf("%v", init.Format(serieFormat)),
 	}
-	serie.Value, err = strconv.ParseInt(serie.Formated, 10, 64)
+	var err error
+	if serie.Value, err = strconv.ParseInt(serie.Formated, 10, 64); err != nil {
+		fmt.Println("| Error | NewSerie(): %v", err)
+	}
 	return
 }
 

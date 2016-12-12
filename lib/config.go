@@ -22,17 +22,20 @@ type Config struct {
 }
 
 // NewConfig creates a config struct.
-func NewConfig() (config *Config, err error) {
+func NewConfig() (config *Config) {
+	var err error
 	config = &Config{Filename: filename}
 	if config.Pwd, err = os.Getwd(); err != nil {
-		log.Error("| Error | %v \n", err)
-		panic(err)
+		log.Error(err)
+		//		panic(err)
+		config.setDefault()
+		return
 	}
 
 	var file = config.File()
 	//	log.Debug("App | Config will be loaded from %v \n", file)
 	if config.Config, err = conf.ReadDefault(file); err != nil {
-		log.Error("| Error | %v \n", err)
+		log.Debug(err)
 		config.setDefault()
 		return
 	}
@@ -44,6 +47,7 @@ func NewConfig() (config *Config, err error) {
 
 // Set default values when config file does not exists
 func (c *Config) setDefault() {
+	log.Debug("Using default values ...")
 	c.Config = &conf.Config{}
 	c.IsProduction = false
 }

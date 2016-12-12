@@ -32,27 +32,17 @@ type App struct {
 	Environment string
 	Version     string
 	Name        string
-	*Command
-}
-
-func config() (config *Config) {
-	var err error
-	if config, err = NewConfig(); err != nil {
-		fmt.Errorf("| Error | Reading config file: %v \n", err)
-	}
-	return
 }
 
 // NewApp initialize all App fields
 func NewApp() (application *App) {
-	var config = config()
 	log = GetLogger()
+	var config = NewConfig()
 	application = &App{
 		app:     kingpin.New(appName, desc),
 		Name:    appName,
 		Config:  config,
 		Log:     log,
-		Command: &Command{},
 		Version: fmt.Sprintf("%v %v %v : %v", appName, appNum, hash, desc),
 	}
 	application.setActions()
@@ -68,8 +58,11 @@ func (a *App) setFlags() {
 
 // SetActions create the relationship between commands, functions and parameters
 func (a *App) setActions() {
-	a.app.Command("up", upMsg).Action(a.RunUp)
-	a.app.Command("create", createMsg).Action(a.RunCreate)
+	var create = NewCreateCommand()
+	a.app.Command("up", upMsg).Action(create.Run)
+
+	var up = NewUpCommand()
+	a.app.Command("create", createMsg).Action(up.Run)
 	//	one.Arg("user_id", "User identifier").Required().Int64Var(&a.UserId)
 }
 
