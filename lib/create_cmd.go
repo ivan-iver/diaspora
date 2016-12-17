@@ -1,26 +1,23 @@
 package lib
 
 import (
-	"github.com/ivan-iver/diaspora/lib/time"
+	"github.com/ivan-iver/diaspora/lib/io"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 // Create struct contains all about migration script creation
 type Create struct {
-	*time.Serie
-}
-
-// NewCreateCommand initialize new Create command.
-func NewCreateCommand() (cmd *Create) {
-	cmd = &Create{
-		Serie: time.NewSerie(),
-	}
-	return
+	Name string
 }
 
 // Run generates a new migration file
 func (cmd *Create) Run(c *kingpin.ParseContext) (err error) {
-	var serie = cmd.Formated
-	log.Info("Serie: ", serie)
+	tmp, err := io.NewTemplate()
+	if err != nil {
+		log.Error(err)
+		return
+	}
+	tmp.Name = cmd.Name
+	err = tmp.Save()
 	return
 }

@@ -58,11 +58,11 @@ func (a *App) setFlags() {
 
 // SetActions create the relationship between commands, functions and parameters
 func (a *App) setActions() {
-	var create = NewCreateCommand()
-	a.app.Command("up", upMsg).Action(create.Run)
-
+	var create = Create{}
+	c := a.app.Command("create", createMsg).Action(create.Run)
+	c.Arg("filename", "File name to create").Required().StringVar(&create.Name)
 	var up = NewUpCommand()
-	a.app.Command("create", createMsg).Action(up.Run)
+	a.app.Command("up", upMsg).Action(up.Run)
 	//	one.Arg("user_id", "User identifier").Required().Int64Var(&a.UserId)
 }
 

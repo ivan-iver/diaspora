@@ -12,7 +12,17 @@ import (
 type File struct {
 	Path string
 	Name string
-	file os.File
+	file *os.File
+}
+
+// Create method storage a new File into file system.
+func (f *File) Create(t *Template) (err error) {
+	if f.file, err = os.Create(f.AbsoluteName()); err != nil {
+		return
+	}
+	defer f.file.Close()
+	err = t.Data.Execute(f.file, t.ID)
+	return
 }
 
 // Read content file
