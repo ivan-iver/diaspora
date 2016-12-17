@@ -40,7 +40,12 @@ func (f *File) AbsoluteName() string {
 	if len(f.Path) == 0 {
 		f.Path, _ = f.Pwd()
 	}
-	return path.Join(f.Path, f.Name)
+	if strings.HasPrefix(f.Path, "/") {
+		return path.Join(f.Path, f.Name)
+	}
+	var p string
+	p, _ = f.Pwd()
+	return path.Join(p, f.Path, f.Name)
 }
 
 // Pwd method gets current directory

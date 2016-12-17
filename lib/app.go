@@ -15,13 +15,15 @@ const (
 	upMsg     = "Migrate the DB to the most recent version available"
 	debugMsg  = "Debug mode enabled"
 	envMsg    = "Set the environment configuration [dev, production, etc] dev is the default"
+	pathMsg   = "Set an alternate location for the folder containing your config and migrations."
 )
 
 var (
-	hash  = ""
-	log   *Logger
-	debug *bool
-	env   *string
+	hash   = ""
+	log    *Logger
+	debug  *bool
+	env    *string
+	dbpath *string
 )
 
 // App is a principal structure where we join all application components.
@@ -54,6 +56,7 @@ func NewApp() (application *App) {
 func (a *App) setFlags() {
 	debug = a.app.Flag("debug", debugMsg).Short('d').Bool()
 	env = a.app.Flag("env", envMsg).Short('e').Default("dev").String()
+	dbpath = a.app.Flag("path", pathMsg).Short('p').Default("db").String()
 }
 
 // SetActions create the relationship between commands, functions and parameters
@@ -61,6 +64,7 @@ func (a *App) setActions() {
 	var create = Create{}
 	c := a.app.Command("create", createMsg).Action(create.Run)
 	c.Arg("filename", "File name to create").Required().StringVar(&create.Name)
+
 	var up = NewUpCommand()
 	a.app.Command("up", upMsg).Action(up.Run)
 	//	one.Arg("user_id", "User identifier").Required().Int64Var(&a.UserId)

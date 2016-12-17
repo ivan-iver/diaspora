@@ -20,6 +20,7 @@ var migrationTpl = template.Must(template.New("migration").Parse(`
 type Template struct {
 	ID   string
 	Name string
+	Path string
 	Data *template.Template
 	*File
 }
@@ -38,6 +39,7 @@ func NewTemplate() (tmp *Template, err error) {
 // Save persist the information template
 func (t *Template) Save() (err error) {
 	t.File.Name = fmt.Sprintf("%s_%s", t.ID, t.Name)
+	t.File.Extension = ".sql"
 	path, err := t.File.Pwd()
 	t.File.Path = path
 	if err != nil {

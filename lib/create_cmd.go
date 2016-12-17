@@ -18,6 +18,7 @@ func (cmd *Create) Run(c *kingpin.ParseContext) (err error) {
 		return
 	}
 	tmp.Name = cmd.Name
+	tmp.Path = *dbpath
 	err = tmp.Save()
 	return
 }
