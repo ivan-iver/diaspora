@@ -38,8 +38,7 @@ func NewTemplate() (tmp *Template, err error) {
 
 // Save persist the information template
 func (t *Template) Save() (err error) {
-	t.File.Name = fmt.Sprintf("%s_%s", t.ID, t.Name)
-	t.File.Extension = ".sql"
+	t.File.Name = fmt.Sprintf("%s_%s.sql", t.ID, t.Name)
 	path, err := t.File.Pwd()
 	t.File.Path = path
 	if err != nil {
