@@ -17,6 +17,11 @@ type File struct {
 
 // Create method storage a new File into file system.
 func (f *File) Create(t *Template) (err error) {
+	if _, err = os.Stat(f.Path); err != nil {
+		if err = os.Mkdir(f.Path, 0755); err != nil {
+			return
+		}
+	}
 	if f.file, err = os.Create(f.AbsoluteName()); err != nil {
 		return
 	}
