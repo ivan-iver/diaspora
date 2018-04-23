@@ -2,7 +2,7 @@ package io
 
 import (
 	"fmt"
-	"github.com/ivan-iver/diaspora/lib/time"
+	"github.com/iver/diaspora/lib/time"
 	"path/filepath"
 	"text/template"
 )

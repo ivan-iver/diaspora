@@ -1,4 +1,4 @@
-package: github.com/ivan-iver/diaspora
+package: github.com/iver/diaspora
 import:
 - package: bitbucket.org/ivan-iver/config
 - package: github.com/op/go-logging

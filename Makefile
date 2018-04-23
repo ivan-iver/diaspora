@@ -5,7 +5,7 @@ VERSION := ($(shell git rev-parse --short HEAD))
 export VERSION;
 
 build:
-	go build -v -ldflags "-X github.com/ivan-iver/diaspora/lib.hash=${VERSION}" -o bin/diaspora github.com/ivan-iver/diaspora
+	go build -v -ldflags "-X github.com/iver/diaspora/lib.hash=${VERSION}" -o bin/diaspora github.com/iver/diaspora
 	@cp templates/db.conf bin/
 
 clean:

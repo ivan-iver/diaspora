@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/ivan-iver/diaspora/lib"
+	"github.com/iver/diaspora/lib"
 	"log"
 	"os"
 	"runtime/debug"

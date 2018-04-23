@@ -4,38 +4,38 @@
 
 [![Travis Widget]][Travis] [![Report Card]][Report] [![GoDoc]][DocDiaspora]
 
-[Travis]: https://travis-ci.org/ivan-iver/diaspora
-[Travis Widget]: https://travis-ci.org/ivan-iver/diaspora.svg?branch=master
+[Travis]: https://travis-ci.org/iver/diaspora
+[Travis Widget]: https://travis-ci.org/iver/diaspora.svg?branch=master
 
-[Report Card]: https://goreportcard.com/badge/github.com/ivan-iver/diaspora
-[Report]: https://goreportcard.com/report/github.com/ivan-iver/diaspora
+[Report Card]: https://goreportcard.com/badge/github.com/iver/diaspora
+[Report]: https://goreportcard.com/report/github.com/iver/diaspora
 
-[GoDoc]: https://godoc.org/github.com/ivan-iver/diaspora?status.svg
-[DocDiaspora]: https://godoc.org/github.com/ivan-iver/diaspora
+[GoDoc]: https://godoc.org/github.com/iver/diaspora?status.svg
+[DocDiaspora]: https://godoc.org/github.com/iver/diaspora
 
 
 **About project technology**
 
   - TODO: More info here
-  
+
 **WorkInProgress**
 
-This project is under construction and could be not work correctly right now. If you wish to test it you can: 
+This project is under construction and could be not work correctly right now. If you wish to test it you can:
 
 * Clone it
 
   ```
-  $ mkdir -p $GOPATH/src/github.com/ivan-iver/
-  $ git clone http://github.com/ivan-iver/diaspora $GOPATH/src/github.com/ivan-iver/diaspora
-  $ cd $GOPATH/src/github.com/ivan-iver/diaspora
+  $ mkdir -p $GOPATH/src/github.com/iver/
+  $ git clone http://github.com/iver/diaspora $GOPATH/src/github.com/iver/diaspora
+  $ cd $GOPATH/src/github.com/iver/diaspora
   ```
-  
+
 * Compile it
 
   ```
   $ make build
   ```
-  
+
 * Run it
 
   ```
@@ -57,7 +57,7 @@ This project is under construction and could be not work correctly right now. If
 
 <a name="install"></a>
 
-## Howto install 
+## Howto install
 
 - TODO: Add descriptions and steps
 

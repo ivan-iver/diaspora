@@ -1,7 +1,7 @@
 package lib
 
 import (
-	"github.com/ivan-iver/diaspora/lib/io"
+	"github.com/iver/diaspora/lib/io"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
